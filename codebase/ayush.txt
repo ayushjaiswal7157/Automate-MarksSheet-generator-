@@ -1,0 +1,87 @@
+import csv
+
+print("====================================")
+print("     AUTOMATED MARKSHEET GENERATOR")
+print("====================================")
+
+# Student Details
+roll = input("Enter Roll Number: ")
+name = input("Enter Student Name: ")
+course = input("Enter Course Name: ")
+
+# Subject Marks
+print("\nEnter Subject Marks")
+
+maths = int(input("Enter Maths Marks: "))
+english = int(input("Enter English Marks: "))
+python = int(input("Enter Python Marks: "))
+computer = int(input("Enter Computer Marks: "))
+science = int(input("Enter Science Marks: "))
+
+# Calculate Total
+total = maths + english + python + computer + science
+
+# Calculate Percentage
+percentage = total / 5
+
+# Calculate Grade
+if percentage >= 90:
+    grade = "A+"
+elif percentage >= 80:
+    grade = "A"
+elif percentage >= 70:
+    grade = "B"
+elif percentage >= 60:
+    grade = "C"
+elif percentage >= 50:
+    grade = "D"
+elif percentage >= 40:
+    grade = "E"
+else:
+    grade = "F"
+
+# Calculate Result
+if (maths >= 40 and english >= 40 and
+    python >= 40 and computer >= 40 and
+    science >= 40):
+    result = "PASS"
+else:
+    result = "FAIL"
+
+# Display Marksheet
+print("\n========== STUDENT MARKSHEET ==========")
+
+print("Roll Number :", roll)
+print("Student Name:", name)
+print("Course      :", course)
+
+print("---------------------------------------")
+print("Maths       :", maths)
+print("English     :", english)
+print("Python      :", python)
+print("Computer    :", computer)
+print("Science     :", science)
+
+print("---------------------------------------")
+print("Total Marks :", total, "/ 500")
+print("Percentage  :", round(percentage, 2), "%")
+print("Grade       :", grade)
+print("Result      :", result)
+
+print("=======================================")
+
+# Save Data in CSV File
+with open("marksheet.csv", "a", newline="") as file:
+
+    writer = csv.writer(file)
+
+    writer.writerow([
+        roll, name, course,
+        maths, english, python,
+        computer, science,
+        total, round(percentage, 2),
+        grade, result
+    ])
+
+print("\nStudent Record Saved Successfully!")
+print("CSV File: marksheet.csv")
